@@ -286,9 +286,20 @@ limitations under the License.
          * @private
          */
         _clickHandler = function (event) {
-            var target = $(event.currentTarget),
-                topli = target.closest('.' + this.settings.topNavItemClass),
-                panel = target.closest('.' + this.settings.panelClass);
+            var target,
+                topli,
+                panel;
+
+            // Touch events show the menu element as the currentTarget
+            // So if this was triggered by touch, use the originalEvent's target
+            if (event.type === 'touchstart') {
+              target = $(event.originalEvent.target);
+            } else {
+              target = $(event.currentTarget);
+            }
+            
+            topli = target.closest('.' + this.settings.topNavItemClass);
+            panel = target.closest('.' + this.settings.panelClass);
             if (topli.length === 1
                     && panel.length === 0
                     && topli.find('.' + this.settings.panelClass).length === 1) {
