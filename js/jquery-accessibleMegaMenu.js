@@ -295,9 +295,9 @@ limitations under the License.
             if (event.type === 'touchstart') {
               target = $(event.originalEvent.target);
             } else {
-              target = $(event.currentTarget);
+              target = $(event.target);
             }
-            
+
             topli = target.closest('.' + this.settings.topNavItemClass);
             panel = target.closest('.' + this.settings.panelClass);
             if (topli.length === 1
